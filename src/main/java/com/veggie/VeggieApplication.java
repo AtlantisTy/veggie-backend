@@ -13,7 +13,7 @@ public class VeggieApplication {
         System.out.println("========================================");
         System.out.println("= Veggie Backend 启动成功!              =");
         System.out.println("= 访问地址: http://localhost:8080       =");
-        System.out.println("= API文档: http://localhost:8080/veggie =");
+        System.out.println("= Swagger文档: http://localhost:8080/veggie/swagger-ui.html =");
         System.out.println("========================================");
     }
 }
