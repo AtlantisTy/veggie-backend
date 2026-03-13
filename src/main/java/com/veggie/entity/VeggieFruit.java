@@ -34,6 +34,12 @@ public class VeggieFruit {
     @ApiModelProperty("季节信息")
     private String seasonInfo;
 
+    @ApiModelProperty("季节开始月份（1-12）")
+    private Integer seasonStart;
+
+    @ApiModelProperty("季节结束月份（1-12）")
+    private Integer seasonEnd;
+
     @ApiModelProperty("烹饪建议")
     private String cookingTip;
 

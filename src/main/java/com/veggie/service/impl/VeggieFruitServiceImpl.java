@@ -7,6 +7,7 @@ import com.veggie.mapper.VeggieFruitMapper;
 import com.veggie.service.VeggieFruitService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -46,5 +47,27 @@ public class VeggieFruitServiceImpl extends ServiceImpl<VeggieFruitMapper, Veggi
     @Override
     public List<VeggieFruit> getVegetables() {
         return getByType("vegetable");
+    }
+
+    @Override
+    public List<VeggieFruit> getCurrentSeasonVegetables() {
+        return getCurrentSeasonByType("vegetable");
+    }
+
+    @Override
+    public List<VeggieFruit> getCurrentSeasonFruits() {
+        return getCurrentSeasonByType("fruit");
+    }
+
+    @Override
+    public List<VeggieFruit> getCurrentSeasonByType(String type) {
+        int currentMonth = LocalDate.now().getMonthValue();
+        LambdaQueryWrapper<VeggieFruit> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(VeggieFruit::getDeleted, 0)
+               .eq(VeggieFruit::getType, type)
+               .and(w -> w.le(VeggieFruit::getSeasonStart, currentMonth)
+                          .ge(VeggieFruit::getSeasonEnd, currentMonth))
+               .orderByDesc(VeggieFruit::getCreateTime);
+        return baseMapper.selectList(wrapper);
     }
 }

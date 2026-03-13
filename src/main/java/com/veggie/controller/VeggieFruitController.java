@@ -41,6 +41,20 @@ public class VeggieFruitController {
         return Result.success("查询成功", list);
     }
 
+    @GetMapping("/listCurrentSeasonVegetables")
+    @ApiOperation("查询当前应季蔬菜")
+    public Result<List<VeggieFruit>> getCurrentSeasonVegetables() {
+        List<VeggieFruit> list = veggieFruitService.getCurrentSeasonVegetables();
+        return Result.success("查询成功", list);
+    }
+
+    @GetMapping("/listCurrentSeasonFruits")
+    @ApiOperation("查询当前应季水果")
+    public Result<List<VeggieFruit>> getCurrentSeasonFruits() {
+        List<VeggieFruit> list = veggieFruitService.getCurrentSeasonFruits();
+        return Result.success("查询成功", list);
+    }
+
     @GetMapping("/getById")
     @ApiOperation("根据ID查询")
     public Result<VeggieFruit> getById(

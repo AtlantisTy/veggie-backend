@@ -16,4 +16,10 @@ public interface VeggieFruitService extends IService<VeggieFruit> {
     List<VeggieFruit> getFruits();
 
     List<VeggieFruit> getVegetables();
+
+    List<VeggieFruit> getCurrentSeasonVegetables();
+
+    List<VeggieFruit> getCurrentSeasonFruits();
+
+    List<VeggieFruit> getCurrentSeasonByType(String type);
 }
