@@ -28,3 +28,7 @@ mybatis-plus:
 logging:
   level:
     com.veggie.mapper: debug
+
+sa-token:
+  token-name: Authorization
+  token-style: simple-uuid

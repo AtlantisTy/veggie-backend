@@ -59,47 +59,27 @@ public class VeggieFruitController {
     @ApiOperation("根据ID查询")
     public Result<VeggieFruit> getById(
             @ApiParam("蔬果ID") @RequestParam Long id) {
-        VeggieFruit veggieFruit = veggieFruitService.getById(id);
-        if (veggieFruit != null) {
-            return Result.success("查询成功", veggieFruit);
-        } else {
-            return Result.error(404, "未找到该蔬果");
-        }
+        return veggieFruitService.getVeggieFruitById(id);
     }
 
     @PostMapping("/add")
     @ApiOperation("添加蔬果")
     public Result<String> add(
             @ApiParam("蔬果信息") @RequestBody VeggieFruit veggieFruit) {
-        boolean saved = veggieFruitService.save(veggieFruit);
-        if (saved) {
-            return Result.success("添加成功");
-        } else {
-            return Result.error("添加失败");
-        }
+        return veggieFruitService.addVeggieFruit(veggieFruit);
     }
 
     @PostMapping("/update")
     @ApiOperation("更新蔬果")
     public Result<String> update(
             @ApiParam("蔬果信息") @RequestBody VeggieFruit veggieFruit) {
-        boolean updated = veggieFruitService.updateById(veggieFruit);
-        if (updated) {
-            return Result.success("更新成功");
-        } else {
-            return Result.error("更新失败");
-        }
+        return veggieFruitService.updateVeggieFruit(veggieFruit);
     }
 
     @PostMapping("/delete")
     @ApiOperation("删除蔬果")
     public Result<String> delete(
             @ApiParam("蔬果ID") @RequestParam Long id) {
-        boolean removed = veggieFruitService.removeById(id);
-        if (removed) {
-            return Result.success("删除成功");
-        } else {
-            return Result.error("删除失败");
-        }
+        return veggieFruitService.deleteVeggieFruit(id);
     }
 }

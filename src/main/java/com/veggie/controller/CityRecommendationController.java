@@ -31,47 +31,27 @@ public class CityRecommendationController {
     @ApiOperation("根据ID查询推荐")
     public Result<CityRecommendation> getById(
             @ApiParam("推荐ID") @RequestParam Long id) {
-        CityRecommendation recommendation = cityRecommendationService.getById(id);
-        if (recommendation != null) {
-            return Result.success("查询成功", recommendation);
-        } else {
-            return Result.error(404, "未找到该推荐");
-        }
+        return cityRecommendationService.getRecommendationById(id);
     }
 
     @PostMapping("/add")
     @ApiOperation("添加城市推荐")
     public Result<String> add(
             @ApiParam("推荐信息") @RequestBody CityRecommendation recommendation) {
-        boolean saved = cityRecommendationService.save(recommendation);
-        if (saved) {
-            return Result.success("添加成功");
-        } else {
-            return Result.error("添加失败");
-        }
+        return cityRecommendationService.addRecommendation(recommendation);
     }
 
     @PostMapping("/update")
     @ApiOperation("更新城市推荐")
     public Result<String> update(
             @ApiParam("推荐信息") @RequestBody CityRecommendation recommendation) {
-        boolean updated = cityRecommendationService.updateById(recommendation);
-        if (updated) {
-            return Result.success("更新成功");
-        } else {
-            return Result.error("更新失败");
-        }
+        return cityRecommendationService.updateRecommendation(recommendation);
     }
 
     @PostMapping("/delete")
     @ApiOperation("删除城市推荐")
     public Result<String> delete(
             @ApiParam("推荐ID") @RequestParam Long id) {
-        boolean removed = cityRecommendationService.removeById(id);
-        if (removed) {
-            return Result.success("删除成功");
-        } else {
-            return Result.error("删除失败");
-        }
+        return cityRecommendationService.deleteRecommendation(id);
     }
 }

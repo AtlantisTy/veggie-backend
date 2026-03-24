@@ -1,5 +1,6 @@
 package com.veggie.common.exception;
 
+import cn.dev33.satoken.exception.NotLoginException;
 import com.veggie.common.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
@@ -35,6 +36,12 @@ public class GlobalExceptionHandler {
     public Result<String> handleNullPointerException(NullPointerException e, HttpServletRequest request) {
         log.error("空指针异常：{}, 请求路径：{}", e.getMessage(), request.getRequestURI());
         return Result.error(500, "系统内部错误");
+    }
+
+    @ExceptionHandler(NotLoginException.class)
+    public Result<String> handleNotLoginException(NotLoginException e, HttpServletRequest request) {
+        log.warn("未登录异常：{}, 请求路径：{}", e.getMessage(), request.getRequestURI());
+        return Result.error(401, "未登录");
     }
 
     @ExceptionHandler(Exception.class)
